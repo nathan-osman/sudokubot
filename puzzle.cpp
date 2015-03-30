@@ -132,7 +132,7 @@ void Puzzle::deduceNumbers(std::vector<Square*> &vec)
                     square->couldBe(num) &&
                     isValid(mRows[square->row()], square, num) &&
                     isValid(mColumns[square->col()], square, num) &&
-                    isValid(mSections[square->col()], square, num)) {
+                    isValid(mSections[square->sec()], square, num)) {
                 locations.push_back(square);
             }
         }
