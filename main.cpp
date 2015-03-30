@@ -54,11 +54,10 @@ int main(int argc, char **argv)
     bool solved = puzzle.solve();
 
     // Indicate the status to the user
-    if(solved) {
-        std::cout << std::endl << "Puzzle was solved. Solution below:" << std::endl;
-    } else {
-        std::cerr << std::endl << "Unable to solve puzzle. Attempt:" << std::endl;
-    }
+    std::cerr << std::endl
+              << (solved ? "Puzzle was solved" : "Unable to solve puzzle")
+              << std::endl
+              << std::endl;
 
     // Display a grid of the solution (or the solver's attempt if unsolved)
     for(int y = 0; y < 9; ++y) {
@@ -69,6 +68,8 @@ int main(int argc, char **argv)
         }
         std::cout << std::endl;
     }
+
+    std::cerr << std::endl;
 
     // Return 0 (success) only if the puzzle was solved
     return solved ? 0 : 1;
