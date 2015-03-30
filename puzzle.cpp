@@ -98,7 +98,7 @@ void Puzzle::eliminateNumbers(std::vector<Square*> &vec)
         if(*orig) {
             for(Square *square : vec) {
                 if(square != orig) {
-                    square->eliminate(*orig);
+                    square->eliminateNumber(*orig);
                 }
             }
         }
@@ -129,10 +129,10 @@ void Puzzle::deduceNumbers(std::vector<Square*> &vec)
         std::vector<Square*> locations;
         for(Square *square : locations) {
             if(square == 0 &&
-                    square->couldBe(num) &&
+                    square->numberEliminatedYet(num) &&
                     isValid(mRows[square->row()], square, num) &&
-                    isValid(mColumns[square->col()], square, num) &&
-                    isValid(mSections[square->sec()], square, num)) {
+                    isValid(mColumns[square->column()], square, num) &&
+                    isValid(mSections[square->section()], square, num)) {
                 locations.push_back(square);
             }
         }

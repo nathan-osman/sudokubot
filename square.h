@@ -27,59 +27,42 @@
 
 #include <vector>
 
-/**
- * Track the possible numbers that could occupy a specific square
- **/
+// Track the possible numbers that could occupy a specific square
 class Square
 {
 public:
 
-    Square(int row, int col, int sec);
+    Square(int row, int column, int section);
 
-    /// Return the square's row
-    int row() const {
-        return mRow;
-    }
+    // Each square needs to keep track of its row / column / section so that
+    // later when the validity of potential numbers is investigated, the area
+    // can be checked for existing numbers
 
-    /// Return the square's column
-    int col() const {
-        return mCol;
-    }
+    int row() const { return mRow; }
+    int column() const { return mColumn; }
+    int section() const { return mSection; }
 
-    /// Return the square's section
-    int sec() const {
-        return mSec;
-    }
+    void eliminateNumber(int number);
+    bool numberEliminatedYet(int number) const;
 
-    /// Rule out a specific possibility
-    void eliminate(int num);
-
-    /// Determine if the number has been eliminated yet
-    bool couldBe(int num) const;
-
-    /// Retrieve the value of the square (0 if unsolved)
+    // Retrieve the value of the square (0 if unsolved)
     operator int() const {
-        return isSolved() ? mPossibilities.at(0) : 0;
+        return (mPossibilities.size() == 1) ? mPossibilities.at(0) : 0;
     }
 
-    /// Set the value of the square
-    void operator=(int num);
+    // Set the value of the square
+    void operator=(int number);
 
-    /// Determine if the square matches the specified number
-    bool operator==(int num) const {
-        return static_cast<int>(*this) == num;
+    // If the square is solved, determine if it matches the number
+    bool operator==(int number) const {
+        return static_cast<int>(*this) == number;
     }
 
 private:
 
-    /// Determine if the square is solved or not
-    bool isSolved() const {
-        return mPossibilities.size() == 1;
-    }
-
     int mRow;
-    int mCol;
-    int mSec;
+    int mColumn;
+    int mSection;
 
     std::vector<int> mPossibilities;
 };

@@ -27,31 +27,31 @@
 
 #include "square.h"
 
-Square::Square(int row, int col, int sec)
+Square::Square(int row, int column, int section)
     : mRow(row),
-      mCol(col),
-      mSec(sec),
+      mColumn(column),
+      mSection(section),
       mPossibilities(9)
 {
     std::iota(mPossibilities.begin(), mPossibilities.end(), 1);
 }
 
-void Square::eliminate(int num)
+void Square::eliminateNumber(int number)
 {
     mPossibilities.erase(std::remove(
         mPossibilities.begin(),
         mPossibilities.end(),
-        num
+        number
     ), mPossibilities.end());
 }
 
-bool Square::couldBe(int num) const
+bool Square::numberEliminatedYet(int number) const
 {
-    return std::find(mPossibilities.begin(), mPossibilities.end(), num) != mPossibilities.end();
+    return std::find(mPossibilities.begin(), mPossibilities.end(), number) != mPossibilities.end();
 }
 
-void Square::operator=(int num)
+void Square::operator=(int number)
 {
     mPossibilities.resize(1);
-    mPossibilities[0] = num;
+    mPossibilities[0] = number;
 }
